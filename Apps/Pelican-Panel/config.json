@@ -1,6 +1,6 @@
 {
     "id": "pelican-panel",
     "version": "v1.0.0-beta14",
-    "image": "ghcr.io/pelican-dev/wings",
+    "image": "ghcr.io/pelican-dev/panel",
     "docs_link": "https://pelican.dev/docs/wings/install"
 }
