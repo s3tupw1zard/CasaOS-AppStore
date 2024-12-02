@@ -1,0 +1,6 @@
+{
+    "id": "pelican-wings",
+    "version": "v1.0.0-beta7",
+    "image": "ghcr.io/pelican-dev/wings",
+    "docs_link": "https://pelican.dev/docs/wings/install"
+}
