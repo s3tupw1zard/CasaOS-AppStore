@@ -133,5 +133,10 @@
     "name": "Database",
     "font": "database-the-application",
     "description": "Database Apps"
+  },
+  {
+    "name": "s3tupw1zard",
+    "font": "web",
+    "description": "s3tupw1zard's Apps"
   }
 ]
