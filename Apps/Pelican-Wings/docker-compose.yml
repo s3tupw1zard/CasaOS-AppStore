@@ -1,10 +1,10 @@
 # s3tupw1zard-pelican-wings configuration
-name: s3tupw1zard-pelican-wings
+name: pelican-wings
 
 # Services section that specifies how the different services should be run
 services:
   # This is the main app service for Pelican Wings
-  app:
+  wings:
     # Name of the container
     container_name: pelican-wings
 
@@ -112,7 +112,7 @@ x-casaos:
   architectures: # Supported CPU architectures
     - amd64
     - arm64
-  main: app # Main service of the application
+  main: wings # Main service of the application
   description: # Description in different languages
     en_us: |
         Wings is Pelican's server control plane, built for the rapidly changing gaming industry and designed to be highly performant and secure. Wings provides an HTTP API allowing you to interface directly with running server instances, fetch server logs, generate backups, and control all aspects of the server lifecycle.

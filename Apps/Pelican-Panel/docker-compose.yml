@@ -1,10 +1,10 @@
 # s3tupw1zard-pelican-panel configuration
-name: s3tupw1zard-pelican-panel
+name: pelican-panel
 
 # Services section that specifies how the different services should be run
 services:
   # This is the main app service for Pelican Panel
-  app:
+  panel:
     # Container configuration for the Pelican Panel
     container_name: pelican-panel
     # Image to use for the panel
@@ -19,10 +19,9 @@ services:
     volumes:
       - "/DATA/AppData/pelican-panel/data:/pelican-data" # Map app data
       - "/DATA/AppData/pelican-panel/logs/:/var/www/html/storage/logs" # Map logs
-      - "/etc/letsencrypt:/etc/letsencrypt" # Map SSL certificates
+      #- "/etc/letsencrypt:/etc/letsencrypt" # Map SSL certificates
     # Environment variables for the container
     environment:
-      APP_ENV: "production"
       APP_URL: "http://localhost" # App URL
       APP_TIMEZONE: "UTC" # App timezone
       ADMIN_EMAIL: "USEYOUROWNEMAILHERE@example.com" # Service author email
@@ -113,7 +112,7 @@ x-casaos:
   architectures: # Supported CPU architectures
     - amd64
     - arm64
-  main: app # Main service of the application
+  main: panel # Main service of the application
   description: # Description in different languages
     en_us: |
         Pelican Panel is an open-source, web-based application designed for easy management of game servers. It offers a user-friendly interface for deploying, configuring, and managing servers, with features like real-time resource monitoring, Docker container isolation, and extensive customization options. Ideal for both individual gamers and hosting companies, it simplifies server administration without requiring deep technical knowledge.
