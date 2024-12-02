@@ -33,3 +33,36 @@ Some of our popular eggs include:
 | [Databases](https://github.com/pelican-eggs/database)                | Redis           | MariaDB       | PostgreSQL         | MongoDB        |
 | [Storage](https://github.com/pelican-eggs/storage)                   | S3              | SFTP Share    |                    |                |
 | [Monitoring](https://github.com/pelican-eggs/monitoring)             | Prometheus      | Loki          |                    |                |
+
+
+## IMPORTANT INSTALLATION INSTRUCTIONS
+
+To use Pelican Panel with e.g. Nginx Proxy Manager in front of it, you need to create the following volume and place a Caddyfile in it:
+
+```
+/DATA/AppData/pelican-panel/caddy:/etc/caddy
+```
+
+Then in your appdata folder under pelican-panel/caddy you need to create the Caddyfile with the following content:
+
+```
+{
+    admin off
+    email {$ADMIN_EMAIL}
+}
+
+:80 {
+    root * /var/www/html/public
+    encode gzip
+
+    php_fastcgi 127.0.0.1:9000
+    file_server
+}
+```
+
+With this custom configuration, your panel will be bound to port 80 without a ssl cert inside your container.
+
+Then you should only need to set the Scheme to http (without an s), Forward Hostname / IP to `pelican-panel` and the Port to 80.
+
+
+Now you can access your newly installed panel. And don't forget to run the installer (https://pelican.yourdomain.com/installer)
