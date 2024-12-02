@@ -1,32 +1,8 @@
 [
   {
-    "appid": "nextcloud"
+    "appid": "pelican-panel"
   },
   {
-    "appid": "adguard-home"
-  },
-  {
-    "appid": "open-webui-ollama"
-  },
-  {
-    "appid": "jellyfin"
-  },
-  {
-    "appid": "photoprism"
-  },
-  {
-    "appid": "plex"
-  },
-  {
-    "appid": "syncthing"
-  },
-  {
-    "appid": "qbittorrent"
-  },
-  {
-    "appid": "siyuan-note"
-  },
-  {
-    "appid": "gitea"
+    "appid": "pelican-wings"
   }
 ]
