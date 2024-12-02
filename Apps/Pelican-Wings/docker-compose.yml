@@ -1,5 +1,5 @@
 # s3tupw1zard-pelican-wings configuration
-name: pelican-wings
+name: s3tupw1zard-pelican-wings
 
 # Services section that specifies how the different services should be run
 services:

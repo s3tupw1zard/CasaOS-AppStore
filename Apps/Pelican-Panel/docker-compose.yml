@@ -1,5 +1,5 @@
 # s3tupw1zard-pelican-panel configuration
-name: pelican-panel
+name: s3tupw1zard-pelican-panel
 
 # Services section that specifies how the different services should be run
 services:
