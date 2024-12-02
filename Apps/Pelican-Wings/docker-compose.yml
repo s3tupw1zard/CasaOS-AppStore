@@ -14,6 +14,9 @@ services:
     # Determines the restart policy. In this case, the container will always restart if it stops.
     restart: always
 
+    networks:
+      - wings0
+
     # Maps the host's port 2022 to the container's port 2022
     ports:
       - "8080:8080"
@@ -106,6 +109,16 @@ services:
         - container: /etc/letsencrypt
           description:
             en_us: Access to SSL certificates # Description for Docker volumes volume
+
+networks:
+  wings0:
+    name: wings0
+    driver: bridge
+    ipam:
+      config:
+        - subnet: "172.128.0.0/16"
+    driver_opts:
+      com.docker.network.bridge.name: wings0
 
 # CasaOS specific configuration
 x-casaos:
