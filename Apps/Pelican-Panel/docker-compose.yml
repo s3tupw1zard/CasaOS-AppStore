@@ -37,6 +37,10 @@ services:
       CACHE_STORE: "file" # Cache driver
       QUEUE_CONNECTION: "database" # Session driver
       SESSION_DRIVER: "file" # Queue driver
+      OAUTH_AUTHENTIK_ENABLED: "false"
+      OAUTH_AUTHENTIK_BASE_URL: "https://oauth.example.com"
+      OAUTH_AUTHENTIK_CLIENT_ID: "Yoursupergoodcl1entid"
+      OAUTH_AUTHENTIK_CLIENT_SECRET: "YoursuperS3cretcl1entsecr3t"
 
     x-casaos: # CasaOS specific configuration
       envs:
@@ -85,6 +89,18 @@ services:
         - container: SESSION_DRIVER
           description:
             en_us: Session driver
+        - container: OAUTH_AUTHENTIK_ENABLED
+          description:
+            en_us: Enable Authentik as SSO Provider
+        - container: OAUTH_AUTHENTIK_BASE_URL
+          description:
+            en_us: Authentik Base URL
+        - container: OAUTH_AUTHENTIK_CLIENT_ID
+          description:
+            en_us: Authentik Client ID
+        - container: OAUTH_AUTHENTIK_CLIENT_SECRET
+          description:
+            en_us: Authentik Client Secret
       volumes:
         - container: /pelican-data/
           description:
