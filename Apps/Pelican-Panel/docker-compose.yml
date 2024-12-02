@@ -133,7 +133,6 @@ x-casaos:
   category: Games
   # Port mapping information
   port_map: "1180"
-  scheme: http
   tips:
     before_install:
       en_us: |
