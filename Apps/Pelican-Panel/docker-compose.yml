@@ -1,0 +1,146 @@
+# s3tupw1zard-pelican-panel configuration
+name: pelican-panel
+
+# Services section that specifies how the different services should be run
+services:
+  # This is the main app service for Pelican Panel
+  app:
+    # Container configuration for the Pelican Panel
+    container_name: pelican-panel
+    # Image to use for the panel
+    image: ghcr.io/pelican-dev/panel:v1.0.0-beta14
+    # Restart the container automatically if it stops
+    restart: always
+    # Ports mapping: [HOST:CONTAINER]
+    ports:
+      - "1180:80" # Map host port 1180 to container port 80
+      - "11443:443" # Map host port 11443 to container port 443
+    # Link this container with the 'database' and 'cache' containers
+    links:
+      - database
+      - cache
+    # Volumes mapping: [HOST:CONTAINER]
+    volumes:
+      - "/DATA/AppData/pelican-panel/data:/pelican-data" # Map app data
+      - "/DATA/AppData/pelican-panel/logs/:/var/www/html/storage/logs" # Map logs
+      - "/etc/letsencrypt:/etc/letsencrypt" # Map SSL certificates
+    # Environment variables for the container
+    environment:
+      APP_ENV: "production"
+      APP_URL: "http://localhost" # App URL
+      APP_TIMEZONE: "UTC" # App timezone
+      ADMIN_EMAIL: "USEYOUROWNEMAILHERE@example.com" # Service author email
+      MAIL_FROM_ADDRESS: "noreply@example.com" # Email sender
+      MAIL_FROM_NAME: "Pelican Admin" # Email from name
+      MAIL_MAILER: "smtp" # Email driver
+      MAIL_HOST: "mail.example.com" # Email host
+      MAIL_PORT: "465" # Email port
+      MAIL_USERNAME: "pelican@example.com" # Email username
+      MAIL_PASSWORD: "yourverysecurepassword" # Email password
+      MAIL_ENCRYPTION: "tls" # Use email encryption
+      APP_ENV: "production" # App environment
+      CACHE_STORE: "file" # Cache driver
+      QUEUE_CONNECTION: "database" # Session driver
+      SESSION_DRIVER: "file" # Queue driver
+      SKIP_CADDY: true # Skip internal web server
+
+    x-casaos: # CasaOS specific configuration
+      envs:
+        - container: APP_ENV
+          description:
+            en_us: App Env
+        - container: APP_URL
+          description:
+            en_us: App URL
+        - container: APP_TIMEZONE
+          description:
+            en_us: App timezone
+        - container: ADMIN_EMAIL
+          description:
+            en_us: Admin email
+        - container: MAIL_FROM_ADDRESS
+          description:
+            en_us: Sender email address
+        - container: MAIL_FROM_NAME
+          description:
+            en_us: Sender email name
+        - container: MAIL_MAILER
+          description:
+            en_us: Email mail driver
+        - container: MAIL_HOST
+          description:
+            en_us: Email host
+        - container: MAIL_PORT
+          description:
+            en_us: Email port
+        - container: MAIL_USERNAME
+          description:
+            en_us: Email username
+        - container: MAIL_PASSWORD
+          description:
+            en_us: Email password
+        - container: MAIL_ENCRYPTION
+          description:
+            en_us: Use email encryption
+        - container: APP_ENV
+          description:
+            en_us: App environment
+        - container: CACHE_STORE
+          description:
+            en_us: Cache store
+        - container: QUEUE_CONNECTION
+          description:
+            en_us: Queue Connection
+        - container: SESSION_DRIVER
+          description:
+            en_us: Session driver
+        - container: SKIP_CADDY
+          description:
+            en_us: Skip Caddy if using Nginx Proxy Manager
+      volumes:
+        - container: /pelican-data/
+          description:
+            en_us: "Container Path: /pelican-data/"
+        - container: /var/www/html/storage/logs/
+          description:
+            en_us: "Container Path: /var/www/html/storage/logs"
+      ports:
+        - container: "80"
+          description:
+            en_us: "Container Port: 80"
+        - container: "443"
+          description:
+            en_us: "Container Port: 443"
+
+# CasaOS specific configuration
+x-casaos:
+  architectures: # Supported CPU architectures
+    - amd64
+    - arm64
+  main: app # Main service of the application
+  description: # Description in different languages
+    en_us: |
+        Pelican Panel is an open-source, web-based application designed for easy management of game servers. It offers a user-friendly interface for deploying, configuring, and managing servers, with features like real-time resource monitoring, Docker container isolation, and extensive customization options. Ideal for both individual gamers and hosting companies, it simplifies server administration without requiring deep technical knowledge.
+
+        Fly High, Game On: Pelican's pledge for unrivaled game servers.
+  tagline: # Short description or tagline in different languages
+    en_us: Pelican Panel
+  developer: "pelican-dev" # Developer's name or identifier
+  author: s3tupw1zard # Author of this configuration
+  icon: https://raw.githubusercontent.com/s3tupw1zard/CasaOS-AppStore/refs/heads/main/Apps/Pelican-Panel/pelican-icon.png
+  # Thumbnail image (currently empty)
+  thumbnail: ""
+  # Title of the application in English
+  title:
+    en_us: Pelican Panel
+  # Application category
+  category: Games
+  # Port mapping information
+  port_map: "1180"
+  scheme: http
+  tips:
+    before_install:
+      en_us: |
+        Before you can use Pelican Panel, you need to read the installation guide.
+
+        [Install Guide Link](https://github.com/s3tupw1zard/CasaOS-AppStore/tree/master/Apps/Pelican-Panel)
