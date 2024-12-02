@@ -2,7 +2,7 @@
 
 set -e 
 
-DEFAULT_APPSTORE_PATH="/var/lib/casaos/appstore/default"
+DEFAULT_APPSTORE_PATH="/var/lib/casaos/appstore/s3tupw1zard"
 
 if [ -d "${DEFAULT_APPSTORE_PATH}" ]; then
     echo "🟩 Backup existing default appstore..."
