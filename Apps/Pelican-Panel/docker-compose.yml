@@ -15,10 +15,6 @@ services:
     ports:
       - "1180:80" # Map host port 1180 to container port 80
       - "11443:443" # Map host port 11443 to container port 443
-    # Link this container with the 'database' and 'cache' containers
-    links:
-      - database
-      - cache
     # Volumes mapping: [HOST:CONTAINER]
     volumes:
       - "/DATA/AppData/pelican-panel/data:/pelican-data" # Map app data
