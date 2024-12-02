@@ -60,7 +60,7 @@ Then in your appdata folder under pelican-panel/caddy you need to create the Cad
 }
 ```
 
-With this custom configuration, your panel will be bound to port 80 without a ssl cert inside your container.
+With this custom configuration, your panel will be bound to port 80 without a ssl cert inside your container. Otherwise it would use your APP_URL which most probably has an https:// in it.
 
 Then you should only need to set the Scheme to http (without an s), Forward Hostname / IP to `pelican-panel` and the Port to 80.
 
