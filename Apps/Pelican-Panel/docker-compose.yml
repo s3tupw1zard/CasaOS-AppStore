@@ -37,13 +37,9 @@ services:
       CACHE_STORE: "file" # Cache driver
       QUEUE_CONNECTION: "database" # Session driver
       SESSION_DRIVER: "file" # Queue driver
-      SKIP_CADDY: true # Skip internal web server
 
     x-casaos: # CasaOS specific configuration
       envs:
-        - container: APP_ENV
-          description:
-            en_us: App Env
         - container: APP_URL
           description:
             en_us: App URL
@@ -89,9 +85,6 @@ services:
         - container: SESSION_DRIVER
           description:
             en_us: Session driver
-        - container: SKIP_CADDY
-          description:
-            en_us: Skip Caddy if using Nginx Proxy Manager
       volumes:
         - container: /pelican-data/
           description:
