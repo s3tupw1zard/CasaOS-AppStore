@@ -57,10 +57,10 @@ services:
             en_us: Sender email name
         - container: MAIL_MAILER
           description:
-            en_us: Email mail driver
+            en_us: Email driver
         - container: MAIL_HOST
           description:
-            en_us: Email host
+            en_us: Mail server host
         - container: MAIL_PORT
           description:
             en_us: Email port
