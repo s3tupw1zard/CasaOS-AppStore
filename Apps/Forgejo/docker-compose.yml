@@ -1,0 +1,75 @@
+name: forgejo
+
+services:
+  forgejo:
+    image: codeberg.org/forgejo/forgejo:9
+    container_name: forgejo
+    environment:
+      - USER_UID=1000
+      - USER_GID=1000
+    restart: always
+    networks:
+      - forgejo
+    volumes:
+      - /DATA/AppData/Forgejo/data:/data
+      - /etc/timezone:/etc/timezone:ro
+      - /etc/localtime:/etc/localtime:ro
+    ports:
+      - '3000:3000'
+      - '222:22'
+
+networks:
+  forgejo:
+    external: false
+
+    x-casaos:
+      envs:
+        - container: USER_UID
+          description:
+            en_us: User ID
+        - container: USER_GID
+          description:
+            en_us: Group ID
+      volumes:
+        - container: /data
+          description:
+            en_us: "Container Path: /data"
+        - container: /etc/timezone
+          description:
+            en_us: "Container Path: /etc/timezone"
+        - container: /etc/localtime
+          description:
+            en_us: "Container Path: /etc/localtime"
+      ports:
+        - container: "22"
+          description:
+            en_us: "Container Port: 22"
+        - container: "3000"
+          description:
+            en_us: "Container Port: 3000"
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: forgejo
+  description:
+    en_us: |
+        Forgejo is a self-hosted lightweight software forge.
+
+        Easy to install and low maintenance, it just does the job. 
+  tagline:
+    en_us: Forgejo
+  developer: "forgejo"
+  author: s3tupw1zard
+  icon: https://raw.githubusercontent.com/s3tupw1zard/CasaOS-AppStore/refs/heads/main/Apps/Forgejo/forgejo-icon.png
+  thumbnail: ""
+  title:
+    en_us: Forgejo
+  category: s3tupw1zard
+  port_map: "3000"
+  scheme: http
+  tips:
+    before_install:
+      en_us: |
+          When the App is installed, the first account registered will become the administrator account.
