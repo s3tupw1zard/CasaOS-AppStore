@@ -1,0 +1,57 @@
+name: example-app
+
+services:
+  example-app:
+    container_name: example-app
+    image: ghcr.io/example-app/app:dev
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - "/DATA/AppData/example-app/data:/example-data"
+    environment:
+      APP_URL: "http://localhost"
+
+    x-casaos:
+      envs:
+        - container: APP_URL
+          description:
+            en_us: App URL
+      volumes:
+        - container: /example-data
+          description:
+            en_us: "Container Path: /example-data"
+      ports:
+        - container: "80"
+          description:
+            en_us: "Container Port: 80"
+        - container: "443"
+          description:
+            en_us: "Container Port: 443"
+
+x-casaos:
+  architectures:
+    - amd64
+    - arm64
+  main: example-app
+  description:
+    en_us: |
+        This is a example description...
+
+        With another line.
+  tagline:
+    en_us: Example App
+  developer: "example-dev"
+  author: s3tupw1zard
+  icon: https://raw.githubusercontent.com/s3tupw1zard/CasaOS-AppStore/refs/heads/main/Apps/Example-App/example-app.png
+  thumbnail: ""
+  title:
+    en_us: Example App
+  category: s3tupw1zard
+  port_map: "80"
+  scheme: http
+  tips:
+    before_install:
+      en_us: |
+        This is an example.
