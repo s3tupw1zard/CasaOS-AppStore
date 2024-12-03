@@ -26,7 +26,7 @@ services:
   mgt:
     container_name: safeline-mgt
     restart: always
-    image: chaitin/safeline-mgt-g:latest
+    image: chaitin/safeline-mgt-g:7.2.4
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /DATA/AppData/Safeline/resources/mgt:/app/data
@@ -62,7 +62,7 @@ services:
   detect:
     container_name: safeline-detector
     restart: always
-    image: chaitin/safeline-detector-g:latest
+    image: chaitin/safeline-detector-g:7.2.4
     volumes:
       - /DATA/AppData/Safeline/resources/detector:/resources/detector
       - /DATA/AppData/Safeline/logs/detector:/logs/detector
@@ -76,7 +76,7 @@ services:
   tengine:
     container_name: safeline-tengine
     restart: always
-    image: chaitin/safeline-tengine-g:latest
+    image: chaitin/safeline-tengine-g:7.2.4
     volumes:
       - /etc/localtime:/etc/localtime:ro
       - /etc/resolv.conf:/etc/resolv.conf:ro
@@ -112,7 +112,7 @@ services:
   luigi:
     container_name: safeline-luigi
     restart: always
-    image: chaitin/safeline-luigi-g:latest
+    image: chaitin/safeline-luigi-g:7.2.4
     environment:
       - MGT_IP=172.22.222.4
       - LUIGI_PG=postgres://safeline-ce:${POSTGRES_PASSWORD}@safeline-pg/safeline-ce?sslmode=disable
@@ -138,7 +138,7 @@ services:
   fvm:
     container_name: safeline-fvm
     restart: always
-    image: chaitin/safeline-fvm-g:latest
+    image: chaitin/safeline-fvm-g:7.2.4
     volumes:
       - /etc/localtime:/etc/localtime:ro
     logging:
@@ -157,7 +157,7 @@ services:
   chaos:
     container_name: safeline-chaos
     restart: always
-    image: chaitin/safeline-chaos-g:latest
+    image: chaitin/safeline-chaos-g:7.2.4
     logging:
       options:
         max-size: "100m"
