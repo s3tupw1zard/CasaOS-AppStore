@@ -62,21 +62,21 @@ services:
           description:
             en_us: PostgreSQL password
       volumes:
-      - container: /etc/localtime
-        description:
-          en_us: "Container Path: /etc/localtime"
-      - container: /app/data
-        description:
-          en_us: "Container Path: /app/data"
-      - container: /app/log/nginx
-        description:
-          en_us: "Container Path: /app/log/nginx"
-      - container: /app/sock
-        description:
-          en_us: "Container Path: /app/sock"
-      - container: /app/run
-        description:
-          en_us: "Container Path: /app/run"
+        - container: /etc/localtime
+          description:
+            en_us: "Container Path: /etc/localtime"
+        - container: /app/data
+          description:
+            en_us: "Container Path: /app/data"
+        - container: /app/log/nginx
+          description:
+            en_us: "Container Path: /app/log/nginx"
+        - container: /app/sock
+          description:
+            en_us: "Container Path: /app/sock"
+        - container: /app/run
+          description:
+            en_us: "Container Path: /app/run"
       ports:
         - container: "1443"
           description:
@@ -196,7 +196,7 @@ services:
           description:
             en_us: "Container Path: /app/data"
       envs:
-      - container: POSTGRES_PASSWORD
+        - container: POSTGRES_PASSWORD
           description:
             en_us: PostgreSQL password
 
