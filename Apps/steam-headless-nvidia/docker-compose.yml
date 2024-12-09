@@ -64,6 +64,7 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=all
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_VERSION=
+      - SHM_SIZE=2G
 
     # VOLUMES:
     volumes:
@@ -151,6 +152,9 @@ services:
         - container: NVIDIA_DRIVER_VERSION
           description:
             en_us: Set Nvidia driver version to install
+        - container: SHM_SIZE
+          description:
+            en_us: Set SHM size
       ports:
         - container: "8083"
           description:
