@@ -47,6 +47,8 @@ services:
       - MODE=primary
       # Web UI
       - WEB_UI_MODE=vnc
+      - WEBUI_USER=
+      - WEBUI_PASS=
       - ENABLE_VNC_AUDIO=true
       - PORT_NOVNC_WEB=8083
       - NEKO_NAT1TO1=
@@ -155,6 +157,12 @@ services:
         - container: SHM_SIZE
           description:
             en_us: Set SHM size
+        - container: WEBUI_USER
+          description:
+            en_us: WebUI user
+        - container: WEBUI_PASS
+          description:
+            en_us: WebUI password
       ports:
         - container: "8083"
           description:
