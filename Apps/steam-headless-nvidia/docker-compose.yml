@@ -5,7 +5,7 @@ services:
     restart: unless-stopped
     ## NOTE: This config uses privileged to access to host to be able to access the required devices
     privileged: true
-    shm_size: ${SHM_SIZE}
+    shm_size: 2G
     ipc: host # Could also be set to 'shareable'
     ulimits:
       nofile:
@@ -21,7 +21,7 @@ services:
           # Ref: https://docs.docker.com/compose/gpu-support/#enabling-gpu-access-to-service-containers
           devices:
             - capabilities: [gpu]
-              device_ids: ["${NVIDIA_VISIBLE_DEVICES}"]
+              device_ids: ["all"]
 
     # NETWORK:
     ## NOTE:  With this configuration, if we do not use the host network, then physical device input
@@ -64,7 +64,7 @@ services:
       - NVIDIA_DRIVER_CAPABILITIES=all
       - NVIDIA_VISIBLE_DEVICES=all
       - NVIDIA_DRIVER_VERSION=
-      - SHM_SIZE=2G
+#      - SHM_SIZE=2G
 
     # VOLUMES:
     volumes:
@@ -152,9 +152,9 @@ services:
         - container: NVIDIA_DRIVER_VERSION
           description:
             en_us: Set Nvidia driver version to install
-        - container: SHM_SIZE
-          description:
-            en_us: Set SHM size
+#        - container: SHM_SIZE
+#          description:
+#            en_us: Set SHM size
       ports:
         - container: "8083"
           description:
