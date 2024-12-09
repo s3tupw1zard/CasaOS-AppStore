@@ -1,4 +1,4 @@
-name: linuxserver-steamos
+name: s3tupw1zard-linuxserver-steamos
 services:
   app:
     image: s3tupw1zard/steamos:20241209
