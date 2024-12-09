@@ -11,7 +11,10 @@ services:
       nofile:
         soft: 1024
         hard: 524288
-
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_NICE
     # GPU PASSTHROUGH
     deploy:
       resources:
@@ -86,6 +89,7 @@ services:
 
       # Input devices used for mouse and joypad support inside the container.
       - /dev/input:/dev/input:ro
+      - /run/udev/data:/run/udev/data
     x-casaos:
       envs:
         - container: TZ
