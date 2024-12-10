@@ -4,5 +4,14 @@
   },
   {
     "appid": "pelican-wings"
+  },
+  {
+    "appid": "forgejo"
+  },
+  {
+    "appid": "steam-headless"
+  },
+  {
+    "appid": "steam-headless-nvidia"
   }
 ]
