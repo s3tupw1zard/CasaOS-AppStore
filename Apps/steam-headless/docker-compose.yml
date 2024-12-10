@@ -189,6 +189,18 @@ x-casaos:
         - Root access
         - Based on Debian Bookworm
 
+        ## Important information:
+
+        Since the creator of the Docker image used does push the most recent image to the same tag you need to pull the image manually when you want to upgrade the version.
+
+        This can be done with this command using ssh:
+
+        ```
+        docker pull josh5/steam-headless:debian
+        ```
+
+        Afterwards restart the container in your CasaOS web interface.
+
   tagline: # Short description or tagline in different languages
     en_us: Steam Headless (AMD+Intel GPU)
   developer: "Josh5" # Developer's name or identifier
@@ -211,4 +223,3 @@ x-casaos:
         You also can review the .env file from the Docker container used for information on the environment variables:
 
         [Evironment Variables](https://github.com/Steam-Headless/docker-steam-headless/blob/master/docs/compose-files/.env)
-        
