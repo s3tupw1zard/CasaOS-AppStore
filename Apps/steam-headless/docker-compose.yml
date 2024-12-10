@@ -1,0 +1,214 @@
+name: steam-headless
+services:
+  steam-headless:
+    image: josh5/steam-headless:debian
+    restart: unless-stopped
+    ## NOTE: This config uses privileged to access to host to be able to access the required devices
+    privileged: true
+    shm_size: ${SHM_SIZE}
+    ipc: host # Could also be set to 'shareable'
+    ulimits:
+      nofile:
+        soft: 1024
+        hard: 524288
+    cap_add:
+      - NET_ADMIN
+      - SYS_ADMIN
+      - SYS_NICE
+
+    # NETWORK:
+    ## NOTE:  With this configuration, if we do not use the host network, then physical device input
+    ##        is not possible and your USB connected controllers will not work in steam games.
+    network_mode: host
+    hostname: steam-headless
+    extra_hosts:
+      - "steam-headless:127.0.0.1"
+    
+    # ENVIRONMENT:
+    ## Read all config variables from the .env file
+    environment:
+      # System
+      - TZ=Europe/Berlin
+      - USER_LOCALES=de_DE.UTF-8 UTF-8
+      - DISPLAY=:55
+      # User
+      - PUID=1000
+      - PGID=1000
+      - UMASK=000
+      - USER_PASSWORD=password
+      # Mode
+      - MODE=primary
+      # Web UI
+      - WEB_UI_MODE=vnc
+      - WEBUI_USER=
+      - WEBUI_PASS=
+      - ENABLE_VNC_AUDIO=true
+      - PORT_NOVNC_WEB=8083
+      - NEKO_NAT1TO1=
+      # Steam
+      - ENABLE_STEAM=true
+      - STEAM_ARGS=-silent
+      # Sunshine
+      - ENABLE_SUNSHINE=false
+      - SUNSHINE_USER=admin
+      - SUNSHINE_PASS=admin
+      # Xorg
+      - ENABLE_EVDEV_INPUTS=true
+      - FORCE_X11_DUMMY_CONFIG=false
+      - SHM_SIZE=2G
+
+    # VOLUMES:
+    volumes:
+      # The location of your home directory.
+      - /DATA/AppData/steam-headless:/home/default:rw
+
+      # The location where all games should be installed.
+      # This path needs to be set as a library path in Steam after logging in.
+      # Otherwise, Steam will store games in the home directory above.
+      - /DATA/Games:/mnt/games:rw
+
+      # The Xorg socket.
+      - /DATA/AppData/steam-headless/.X11-unix:/tmp/.X11-unix:rw
+
+      # Pulse audio socket.
+      - /DATA/AppData/steam-headless/pulse:/tmp/pulse:rw
+
+      # Input devices used for mouse and joypad support inside the container.
+      - /dev/input:/dev/input:ro
+      - /run/udev/data:/run/udev/data:ro
+    x-casaos:
+      envs:
+        - container: TZ
+          description:
+            en_us: Timezone
+        - container: USER_LOCALES
+          description:
+            en_us: User locales
+        - container: DISPLAY
+          description:
+            en_us: Display to use
+        - container: PUID
+          description:
+            en_us: User ID
+        - container: PGID
+          description:
+            en_us: Group ID
+        - container: UMASK
+          description:
+            en_us: Umask
+        - container: USER_PASSWORD
+          description:
+            en_us: Password for default user
+        - container: MODE
+          description:
+            en_us: Mode
+        - container: WEB_UI_MODE
+          description:
+            en_us: Web UI mode
+        - container: ENABLE_VNC_AUDIO
+          description:
+            en_us: Enable VNC audio
+        - container: PORT_NOVNC_WEB
+          description:
+            en_us: Port for noVNC
+        - container: NEKO_NAT1TO1
+          description:
+            en_us: Neko NAT1TO1
+        - container: ENABLE_STEAM
+          description:
+            en_us: Enable Steam
+        - container: STEAM_ARGS
+          description:
+            en_us: Steam args
+        - container: ENABLE_SUNSHINE
+          description:
+            en_us: Enable Sunshine
+        - container: SUNSHINE_USER
+          description:
+            en_us: Sunshine user
+        - container: SUNSHINE_PASS
+          description:
+            en_us: Sunshine password
+        - container: ENABLE_EVDEV_INPUTS
+          description:
+            en_us: Enable evdev inputs
+        - container: FORCE_X11_DUMMY_CONFIG
+          description:
+            en_us: Enable X11 dummy config
+        - container: SHM_SIZE
+          description:
+            en_us: Set SHM size
+        - container: WEBUI_USER
+          description:
+            en_us: WebUI user
+        - container: WEBUI_PASS
+          description:
+            en_us: WebUI password
+      ports:
+        - container: "8083"
+          description:
+            en_us: "WebUI port"
+      volumes:
+        - container: /home/default
+          description:
+            en_us: The location of your home directory.
+        - container: /mnt/games
+          description:
+            en_us: Your Games directory where all games should be installed.
+        - container: /tmp/.X11-unix
+          description:
+            en_us: The Xorg Socket.
+        - container: /tmp/pulse
+          description:
+            en_us: Pulse audio socket.
+        - container: /dev/input
+          description:
+            en_us: Input devices used for mouse and joypad support inside the container.
+
+x-casaos:
+  architectures: # Supported CPU architectures
+    - amd64
+  main: steam-headless # Main service of the application
+  description: # Description in different languages
+    en_us: |
+        Remote Game Streaming Server.
+
+        Play your games either in the browser with audio or via Steam Link or Moonlight. Play from another Steam Client with Steam Remote Play.
+
+        Easily deploy a Steam Docker instance in seconds.
+
+        ## Features:
+        
+        - Steam Client configured for running on Linux with Proton
+        - Moonlight compatible server for easy remote desktop streaming
+        - One click installation of EmeDeck, Heroic and Lutris
+        - Full video/audio noVNC web access to a Xfce4 Desktop
+        - NVIDIA, AMD and Intel GPU support
+        - Full controller support
+        - Support for Flatpak and Appimage installation
+        - Root access
+        - Based on Debian Bookworm
+
+  tagline: # Short description or tagline in different languages
+    en_us: Steam Headless (AMD+Intel GPU)
+  developer: "Josh5" # Developer's name or identifier
+  author: s3tupw1zard # Author of this configuration
+  icon: https://raw.githubusercontent.com/s3tupw1zard/CasaOS-AppStore/refs/heads/main/Apps/steam-headless/steam-headless-icon.png
+  # Thumbnail image (currently empty)
+  thumbnail: ""
+  # Title of the application in English
+  title:
+    en_us: Steam Headless (AMD+Intel GPU)
+  # Application category
+  category: s3tupw1zard
+  # Port mapping information
+  port_map: "8083"
+  tips:
+    before_install:
+      en_us: |
+        This is the steam-headless version which can be used with AMD and Intel GPUs. For Nvidia take a look at the Steam Headless (Nvidia GPU) app.
+
+        You also can review the .env file from the Docker container used for information on the environment variables:
+
+        [Evironment Variables](https://github.com/Steam-Headless/docker-steam-headless/blob/master/docs/compose-files/.env)
+        
