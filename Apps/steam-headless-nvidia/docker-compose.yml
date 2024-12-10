@@ -213,7 +213,7 @@ x-casaos:
         - Based on Debian Bookworm
 
   tagline: # Short description or tagline in different languages
-    en_us: Steam Headless (Nvidia GPUs)
+    en_us: Steam Headless (Nvidia GPU)
   developer: "Josh5" # Developer's name or identifier
   author: s3tupw1zard # Author of this configuration
   icon: https://raw.githubusercontent.com/s3tupw1zard/CasaOS-AppStore/refs/heads/main/Apps/steam-headless-nvidia/steam-headless-icon.png
@@ -221,7 +221,7 @@ x-casaos:
   thumbnail: ""
   # Title of the application in English
   title:
-    en_us: Steam Headless (Nvidia GPUs)
+    en_us: Steam Headless (Nvidia GPU)
   # Application category
   category: s3tupw1zard
   # Port mapping information
