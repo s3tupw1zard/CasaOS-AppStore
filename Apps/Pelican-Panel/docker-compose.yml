@@ -8,7 +8,7 @@ services:
     # Container configuration for the Pelican Panel
     container_name: pelican-panel
     # Image to use for the panel
-    image: ghcr.io/pelican-dev/panel:v1.0.0-beta14
+    image: ghcr.io/pelican-dev/panel:v1.0.0-beta16
     # Restart the container automatically if it stops
     restart: always
     # Ports mapping: [HOST:CONTAINER]
